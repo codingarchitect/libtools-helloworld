@@ -19,7 +19,7 @@ CLNCACHE=cleancache
 CACHEDIR=SunWS_cachea
 MAKE=make
 MAKEFILE=Makefile
-PROCDEMO=hello-world
+PROCDEMO=helloapp
 
 PROC=$(ICSDKHOME)proc
 SO_EXT=.so
@@ -68,9 +68,7 @@ DEMO_PROC_BUILD=$(CC) -o $(EXE) $(OBJS) $(AM_LDFLAGS) $(PROLDLIBS)
 # Targets for building the proc sample programs.
 # all: clean-local $(PROCDEMO)
 
-$(PROCDEMO):
-	$(MAKE) -f $(MAKEFILE) build OBJS=$@.o EXE=$@
-	
+
 build: $(CLNCACHE) $(OBJS)
 	$(MKLINK) $(ICLIBHOME)libclntsh$(SO_EXT).11.1 $(ICLIBHOME)libclntsh$(SO_EXT)
 	$(DEMO_PROC_BUILD)
@@ -96,7 +94,7 @@ pc1:
 #-----------------------------------------------------------------------------
 # Clean up all executables, *.o and generated *.c files
 clean-local: $(CLNCACHE)
-	$(REMOVE) $(PROCDEMO) $(PROCDEMO).o $(PROCDEMO).c $(PROCDEMO).lis
+	$(REMOVE) $(PROCDEMO)
 
 cleancache:
 	$(REMOVE) $(CACHEDIR)
