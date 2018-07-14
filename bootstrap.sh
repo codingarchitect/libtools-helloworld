@@ -33,6 +33,8 @@
 # Run autoconf (will create the 'configure'-script).
 # autoconf
 
+# Create a symlink to clntsh lib for oracle
+ln -sf /var/sol2lin/share/oracle/instantclient_11_2/libclntsh.so.11.1 /var/sol2lin/share/oracle/instantclient_11_2/libclntsh.so
 autoreconf --install
 ./configure
 make
