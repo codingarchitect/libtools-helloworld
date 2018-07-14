@@ -25,10 +25,10 @@ PROC=$(ICSDKHOME)proc
 SO_EXT=.so
 I_SYM=-I
 
-CCINCLUDES= $(I_SYM). $(I_SYM)$(ICSDKHOME)include $(I_SYM)/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include
+CCINCLUDES= $(I_SYM)./../lib $(I_SYM)$(ICSDKHOME)include $(I_SYM)/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include
 
 # Pre-compiler Flags.
-PRECOMP_INCLUDE=$(I_SYM). $(SYS_INCLUDE)
+PRECOMP_INCLUDE=$(I_SYM)./lib $(SYS_INCLUDE)
 PRECOMPPUBH=$(ICSDKHOME)include
 SYS_INCLUDE=sys_include=\($(PRECOMPPUBH),/usr/include,/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include\)
 
@@ -37,7 +37,7 @@ OPTIMIZE=-O2
 LDPATHFLAG=-L
 SPFLAGS=-DLINUX -D_LARGEFILE64_SOURCE=1 -D_LARGEFILE_SOURCE=1 -DSLTS_ENABLE -DSLMXMX_ENABLE -D_REENTRANT -DNS_THREADS
 CCFLAGS= -fPIC -DPRECOMP
-LDFLAGS=-g
+AM_LDFLAGS=-g
 LPFLAGS=
 GFLAG=
 CDEBUG=
@@ -45,8 +45,8 @@ USRFLAGS=
 ICLIBPATH=$(LDPATHFLAG)$(ICLIBHOME)
 PFLAGS=$(CCINCLUDES) $(SPFLAGS) $(LPFLAGS)
 #CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -H
-CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -ansi
-#CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -H -include "/usr/include/time.h" 
+#AM_CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -ansi
+AM_CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -include "/usr/include/time.h" 
 
 
 # Libraries.
@@ -60,13 +60,13 @@ EXSYSLIBS=-ldl
 MATHLIB=-lm
 THREADLIBS=-lpthread
 
-C2O=$(CC) $(CFLAGS) -c $*.c
+C2O=$(CC) $(AM_CFLAGS) -c $*.c
 PCC2C=$(PROC) $(PROCFLAGS) iname=$(PCCSRC) $(PRECOMP_INCLUDE)
-DEMO_PROC_BUILD=$(CC) -o $(EXE) $(OBJS) $(LDFLAGS) $(PROLDLIBS)
+DEMO_PROC_BUILD=$(CC) -o $(EXE) $(OBJS) $(AM_LDFLAGS) $(PROLDLIBS)
 
 #-----------------------------------------------------------------------------
 # Targets for building the proc sample programs.
-# all: clean $(PROCDEMO)
+# all: clean-local $(PROCDEMO)
 
 $(PROCDEMO):
 	$(MAKE) -f $(MAKEFILE) build OBJS=$@.o EXE=$@
@@ -90,12 +90,12 @@ pc1:
 	$(MAKE) -f $(MAKEFILE) PROCFLAGS="$(PROCFLAGS)" PCCSRC=$* I_SYM=include= pc1
 	$(C2O)
 
-.c.o:
-	$(C2O)
+#.c.o:
+#	$(C2O)
 
 #-----------------------------------------------------------------------------
 # Clean up all executables, *.o and generated *.c files
-clean: $(CLNCACHE)
+clean-local: $(CLNCACHE)
 	$(REMOVE) $(PROCDEMO) $(PROCDEMO).o $(PROCDEMO).c $(PROCDEMO).lis
 
 cleancache:

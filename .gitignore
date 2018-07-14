@@ -22,6 +22,9 @@ config.h.in
 /lib/.libs
 *.lo
 *.la
+*.lis
 stamp-h1
 libtool
 config.h
+src/main.c
+lib/sys-params.c

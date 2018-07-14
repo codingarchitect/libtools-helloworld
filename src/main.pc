@@ -7,11 +7,11 @@
 #include <sqlca.h>
 #include <sqlda.h>
 #include <sqlcpr.h>
-#include "morning-greeter.h"
-#include "afternoon-greeter.h"
-#include "evening-greeter.h"
-#include "night-greeter.h"
-#include "sys-params.h"
+#include "../lib/morning-greeter.h"
+#include "../lib/afternoon-greeter.h"
+#include "../lib/evening-greeter.h"
+#include "../lib/night-greeter.h"
+#include "../lib/sys-params.h"
 
 #define NAME_LEN 30
 #define DESC_LEN 256

@@ -46,8 +46,8 @@ USRFLAGS=
 ICLIBPATH=$(LDPATHFLAG)$(ICLIBHOME)
 PFLAGS=$(CCINCLUDES) $(SPFLAGS) $(LPFLAGS)
 #CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -H
-AM_CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -ansi
-#CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -H -include "/usr/include/time.h" 
+#AM_CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -ansi
+AM_CFLAGS=$(GFLAG) $(OPTIMIZE) $(CDEBUG) $(CCFLAGS) $(PFLAGS) $(USRFLAGS) -include "/usr/include/time.h" 
 
 
 # Libraries.
@@ -91,8 +91,8 @@ pc1:
 	$(MAKE) -f $(MAKEFILE) PROCFLAGS="$(PROCFLAGS)" PCCSRC=$* I_SYM=include= pc1
 	$(C2O)
 
-.c.o:
-	$(C2O)
+#.c.o:
+#	$(C2O)
 
 #-----------------------------------------------------------------------------
 # Clean up all executables, *.o and generated *.c files
